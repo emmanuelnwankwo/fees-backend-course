@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-course",
+  "version": "1.0.0",
+  "description": "Part 1 of Nodejs course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmanuelnwankwo/nodejs-course.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Emmanuel Nwankwo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emmanuelnwankwo/nodejs-course/issues"
+  },
+  "homepage": "https://github.com/emmanuelnwankwo/nodejs-course#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "qrcode": "^1.5.3"
+  }
+}

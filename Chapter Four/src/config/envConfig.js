@@ -10,7 +10,7 @@ const envScheme = {
     NODE_ENV: String,
     MONGODB_URI: String
 }
-
+console.log('process: ', process.env.NODE_ENV);
 const env = validateEnv(envScheme);
 
 module.exports = {

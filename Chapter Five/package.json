@@ -7,8 +7,7 @@
     "start": "NODE_ENV=production  node src/index.js",
     "start:dev": "nodemon --watch",
     "lint": "npx eslint src",
-    "lint:fix": "npm run lint -- --fix",
-    "install": "npm ci --only=production"
+    "lint:fix": "npm run lint -- --fix"
   },
   "author": "",
   "license": "ISC",

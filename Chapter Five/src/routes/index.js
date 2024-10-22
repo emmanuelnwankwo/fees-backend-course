@@ -22,7 +22,7 @@ const options = {
                 description: "Development environment"
             },
             {
-                url: '',
+                url: 'https://fees-product-api.onrender.com',
                 description: "Production environment"
             }
         ],

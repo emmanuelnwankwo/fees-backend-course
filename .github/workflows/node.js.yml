@@ -1,10 +1,11 @@
-name: Node.js CI
+name: NodeJS CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: 
+      - main
+    tags:
+      - 'v*'
 
 jobs:
   test:
@@ -24,3 +25,16 @@ jobs:
       run: |
         npm ci
         npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Production
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Deploy to Render
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+          wait-for-success: true

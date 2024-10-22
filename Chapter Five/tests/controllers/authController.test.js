@@ -4,8 +4,20 @@ const User = require('../../src/models/user');
 const app = require('../../src/index');
 
 jest.mock('../../src/models/user');
+jest.mock('../../src/config/envConfig', () => {
+    return {
+        env: {
+            JWT_SECRET: 'secret',
+            MONGODB_URI: 'mongodb://localhost:test/test',
+            PORT: 3000,
+            NODE_ENV: 'test'
+        }
+    }
+});
 
 describe('Auth Controller', () => {
+    jest.spyOn(console, 'error').mockImplementation(() => { });
+    
     afterEach(() => {
         jest.clearAllMocks();
     });

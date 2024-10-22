@@ -6,10 +6,21 @@ const bcrypt = require('bcrypt');
 
 jest.mock('../../src/models/product');
 jest.mock('../../src/models/user');
+jest.mock('../../src/config/envConfig', () => {
+    return {
+        env: {
+            JWT_SECRET: 'secret',
+            MONGODB_URI: 'mongodb://localhost:test/test',
+            PORT: 3000,
+            NODE_ENV: 'test'
+        }
+    }
+});
 
 
 describe('Product Controller', () => {
     let token;
+    jest.spyOn(console, 'error').mockImplementation(() => { });
 
     afterEach(() => {
         jest.clearAllMocks();
@@ -46,13 +57,13 @@ describe('Product Controller', () => {
         it('should return 401 if no token is provided', async () => {
             const response = await request(app)
                 .get('/api/products');
-            
+
             expect(response.statusCode).toBe(401);
             expect(response.body.error).toBe('Unauthorized');
         });
         it('should return 404 if no products found', async () => {
             Product.find.mockResolvedValue([]);
-    
+
             const response = await request(app)
                 .get('/api/products')
                 .set('Authorization', token);
@@ -96,7 +107,7 @@ describe('Product Controller', () => {
                 .post('/api/product')
                 .set('Authorization', token)
                 .send(newProduct);
-            
+
             expect(response.statusCode).toBe(201);
             expect(response.body.message).toBe('Product created successfully');
             expect(response.body.data).toEqual(newProduct);
@@ -104,7 +115,7 @@ describe('Product Controller', () => {
         it('should return 409 if product already exists', async () => {
             const existingProduct = { name: 'Existing Product', description: 'Test product', status: 'available' };
             Product.findOne.mockResolvedValue(existingProduct);
-            
+
             const response = await request(app)
                 .post('/api/product')
                 .set('Authorization', token)

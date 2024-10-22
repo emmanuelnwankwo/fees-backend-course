@@ -1,5 +1,4 @@
 const { onAddProduct, onUpdateProduct } = require('../../src/middlewares/productMiddleware');
-const { productValidation } = require('../../src/validations/index');
 
 describe('Product Middleware', () => {
     let req, res, next;

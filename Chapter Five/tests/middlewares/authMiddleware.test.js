@@ -7,7 +7,7 @@ jest.mock('jsonwebtoken');
 jest.mock('../../src/config/envConfig', () => {
     return {
         env: {
-            JWT_SECRET: 'secret'
+            JWT_SECRET: 'secret',
         }
     }
 });
